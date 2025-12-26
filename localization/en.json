@@ -1,0 +1,40 @@
+{
+    "language": {
+        "en": "English"
+    },
+    "plugin.description": "A plugin that enhances the frontal blindspot view with animated camera movements in Euro Truck Simulator 2 and American Truck Simulator.",
+    "settings": {
+        "target_camera.position.x.title": "Target Position X",
+        "target_camera.position.x.desc": "Left/Right position offset relative to the seat.",
+        "target_camera.position.y.title": "Target Position Y",
+        "target_camera.position.y.desc": "Up/Down position offset relative to the seat.",
+        "target_camera.position.z.title": "Target Position Z",
+        "target_camera.position.z.desc": "Forward/Backward position offset relative to the seat.",
+        "target_camera.rotation.yaw.title": "Target Rotation Yaw",
+        "target_camera.rotation.yaw.desc": "Horizontal rotation (look left/right).",
+        "target_camera.rotation.pitch.title": "Target Rotation Pitch",
+        "target_camera.rotation.pitch.desc": "Vertical rotation (look up/down).",
+        "target_camera.fov.title": "Target Field of View (FOV)",
+        "target_camera.fov.desc": "The camera's Field of View when peeking.",
+        "animation.speed.title": "Animation Speed",
+        "animation.speed.desc": "How fast the camera moves to the target position.",
+        "animation.type.title": "Animation Type",
+        "animation.type.desc": "The style of camera animation. 'Linear' is a direct path. 'Live' simulates head movement.",
+        "animation_type_options": {
+            "Linear": "Linear",
+            "Live": "Live"
+        },
+        "groups.target_camera.title": "Target Camera Settings",
+        "groups.target_camera.desc": "Parameters for the camera's final position and orientation when peeking.",
+        "groups.animation.title": "Animation Settings",
+        "groups.animation.desc": "Controls the camera transition animation.",
+        "groups.target_camera.position.title": "Position",
+        "groups.target_camera.position.desc": "Position offset relative to the seat.",
+        "groups.target_camera.rotation.title": "Rotation",
+        "groups.target_camera.rotation.desc": "Rotation offset relative to the seat."
+    },
+    "keybinds": {
+        "toggle.title": "Toggle Peek View",
+        "toggle.desc": "Press to peek forward and see the blindspot. Press again to return."
+    }
+}
