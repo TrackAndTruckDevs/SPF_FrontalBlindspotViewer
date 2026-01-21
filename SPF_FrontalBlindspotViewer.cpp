@@ -42,6 +42,7 @@ void GetManifestData(SPF_ManifestData_C& out_manifest) {
         auto& info = out_manifest.info;
         strncpy_s(info.name, PLUGIN_NAME, sizeof(info.name));
         strncpy_s(info.version, "1.0.0", sizeof(info.version));
+        strncpy_s(info.min_framework_version, "1.0.7", sizeof(info.min_framework_version));
         strncpy_s(info.author, "Track'n'Truck Devs", sizeof(info.author));
         strncpy_s(info.descriptionKey, "plugin.description", sizeof(info.descriptionKey));
 
