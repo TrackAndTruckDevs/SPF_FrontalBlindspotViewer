@@ -21,7 +21,7 @@ target_include_directories(${PLUGIN_NAME} PRIVATE
     "${CMAKE_CURRENT_SOURCE_DIR}/SPF_API"
 )
 
-set(GAME_PLUGINS_DIR "E:/SteamLibrary/steamapps/common/Euro Truck Simulator 2/bin/win_x64/plugins" CACHE PATH "Path to the game's plugins directory")
+set(GAME_PLUGINS_DIR "E:/SteamLibrary/steamapps/common/American Truck Simulator/bin/win_x64/plugins" CACHE PATH "Path to the game's plugins directory")
 
 
 # All plugins should go into a 'plugins' subfolder in the output directory

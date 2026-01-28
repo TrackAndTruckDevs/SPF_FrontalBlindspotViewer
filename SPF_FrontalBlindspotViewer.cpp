@@ -17,7 +17,7 @@ namespace SPF_FrontalBlindspotViewer {
 
 /**
  * @brief A constant for the plugin's name.
- * @details This MUST match the name used in `GetContext` calls for various APIs
+ * @details This MUST match the name used in `Cfg_GetContext` calls for various APIs
  * and the plugin's directory name.
  */
 const char* PLUGIN_NAME = "SPF_FrontalBlindspotViewer";
@@ -32,253 +32,114 @@ PluginContext g_ctx;
 // 2. Manifest Implementation
 // =================================================================================================
 
-void GetManifestData(SPF_ManifestData_C& out_manifest) {
-    // This function defines all the metadata for your plugin. The framework calls this
-    // function *before* loading your plugin DLL to understand what it is.
-
-    // --- 2.1. Plugin Information (SPF_InfoData_C) ---
-    // This section provides the basic identity of your plugin.
-    {
-        auto& info = out_manifest.info;
-        strncpy_s(info.name, PLUGIN_NAME, sizeof(info.name));
-        strncpy_s(info.version, "1.0.1", sizeof(info.version));
-        strncpy_s(info.min_framework_version, "1.0.7", sizeof(info.min_framework_version));
-        strncpy_s(info.author, "Track'n'Truck Devs", sizeof(info.author));
-        strncpy_s(info.descriptionKey, "plugin.description", sizeof(info.descriptionKey));
-
-        strncpy_s(info.email, "mailto:spf.framework@gmail.com", sizeof(info.email));
-        strncpy_s(info.youtubeUrl, "https://www.youtube.com/@TrackAndTruck", sizeof(info.youtubeUrl));
-        strncpy_s(info.patreonUrl, "https://www.patreon.com/TrackAndTruckDevs", sizeof(info.patreonUrl));
-    }
-
-
-    {
-        auto& policy = out_manifest.configPolicy;
-
-        // `allowUserConfig`: Set to `true` if you want a `settings.json` file to be created
-        // for your plugin, allowing users (or the framework UI) to override default settings.
-        policy.allowUserConfig = true;
-
-        // `userConfigurableSystemsCount`: The number of framework systems (e.g., "settings", "logging", "localization", "ui")
-        // that should have a configuration section generated in the settings UI for your plugin.
-        // IMPORTANT: Always initialize this to 0 if you are not listing any systems to avoid errors.
-        policy.userConfigurableSystemsCount = 2; //To enable configurable systems, uncomment the block below and set the count accordingly
-        // strncpy_s(policy.userConfigurableSystems[0], "logging", sizeof(policy.userConfigurableSystems[0]));
-        strncpy_s(policy.userConfigurableSystems[0], "settings", sizeof(policy.userConfigurableSystems[0]));
-        strncpy_s(policy.userConfigurableSystems[1], "localization", sizeof(policy.userConfigurableSystems[1]));
-        // strncpy_s(policy.userConfigurableSystems[1], "ui", sizeof(policy.userConfigurableSystems[1]));
-
-        // `requiredHooksCount`: List any game hooks your plugin absolutely requires to function.
-        // The framework will ensure these hooks are enabled whenever your plugin is active,
-        // regardless of user settings.
-        // IMPORTANT: Always initialize this to 0 if you are not listing any hooks to avoid errors.
-        policy.requiredHooksCount = 0; // To enable required hooks, uncomment the lines below and set the count accordingly.
-        // strncpy_s(policy.requiredHooks[0], "GameConsole", sizeof(policy.requiredHooks[0])); // Example: Requires GameConsole hook
-    }
-
-    // --- 2.3. Custom Settings (settingsJson) ---
-    // A JSON string literal that defines the default values for your plugin's custom settings.
-    // If `policy.allowUserConfig` is true, the framework creates a `settings.json` file.
-    // The JSON object you provide here will be inserted under a top-level key named "settings".
-    // Example: Define some default custom settings.
-    // To provide user-friendly names and descriptions, see `customSettingsMetadata` at the end.
-    out_manifest.settingsJson = R"json(
+    void BuildManifest(SPF_Manifest_Builder_Handle* h, const SPF_Manifest_Builder_API* api) {
+        // This function defines all the metadata for your plugin. The framework calls this
+        // function *before* loading your plugin DLL to understand what it is.
+        // --- 2.1. Plugin Information ---
+        // This section provides the basic identity of your plugin.
         {
-            "target_camera": {
-                "position": { "x": -0.06, "y": -0.10, "z": -0.88 },
-                "rotation": { "yaw": -0.03, "pitch": 0.58 },
-                "fov": 80.0
-            },
-            "animation": {
-                "speed": 1.1,
-                "type": "live"
+            api->Info_SetName(h, PLUGIN_NAME);
+            api->Info_SetVersion(h, "1.0.2");
+            api->Info_SetMinFrameworkVersion(h, "1.1.0");
+            api->Info_SetAuthor(h, "Track'n'Truck Devs");
+            api->Info_SetDescriptionKey(h, "plugin.description");
+
+            api->Info_SetEmail(h, "mailto:spf.framework@gmail.com");
+            api->Info_SetYoutubeUrl(h, "https://www.youtube.com/@TrackAndTruck");
+            api->Info_SetPatreonUrl(h, "https://www.patreon.com/TrackAndTruckDevs");
+        }
+
+
+        {
+            // `allowUserConfig`: Set to `true` if you want a `settings.json` file to be created
+            // for your plugin, allowing users (or the framework UI) to override default settings.
+            api->Policy_SetAllowUserConfig(h, true);
+
+            // Enable specific systems in the settings UI.
+            api->Policy_AddConfigurableSystem(h, "settings");
+            api->Policy_AddConfigurableSystem(h, "localization");
+        }
+
+        // --- 2.3. Custom Settings Defaults ---
+        // A JSON string defines the default values for your plugin's custom settings.
+        api->Settings_SetJson(h, R"json(
+            {
+                "target_camera": {
+                    "position": { "x": -0.06, "y": -0.10, "z": -0.88 },
+                    "rotation": { "yaw": -0.03, "pitch": 0.58 },
+                    "fov": 80.0
+                },
+                "animation": {
+                    "speed": 1.1,
+                    "type": "live"
+                }
             }
-        }
-    )json";
+        )json");
 
-    // --- 2.4. Default Settings for Framework Systems ---
-    // Here you can provide default configurations for various framework systems.
+        // --- 2.4. Default Settings for Framework Systems ---
 
-    // --- Logging ---
-    // Requires: SPF_Logger_API.h
-    {
-        auto& logging = out_manifest.logging;
-        // `level`: Default minimum log level for this plugin (e.g., "trace", "debug", "info", "warn", "error", "critical").
-        strncpy_s(logging.level, "info", sizeof(logging.level));
-        // `sinks.file`: If true, logs from this plugin will be written to a dedicated file
-        // (e.g., `SPF_FrontalBlindspotViewer/logs/SPF_FrontalBlindspotViewer.log`) in addition to the main framework log.
-        logging.sinks.file = false;
-    }
+        // Logging
+        api->Defaults_SetLogging(h, "info", false);
 
-    // --- Localization ---
-    // Requires: SPF_Localization_API.h
-    // Uncomment if your plugin uses localized strings.
-    {
-        auto& localization = out_manifest.localization;
-        // `language`: Default language code (e.g., "en", "de", "uk").
-        strncpy_s(localization.language, "en", sizeof(localization.language));
-    }
+        // Localization
+        api->Defaults_SetLocalization(h, "en");
 
-    // --- Keybinds ---
-    // Requires: SPF_KeyBinds_API.h
-    // Uncomment and configure if your plugin needs custom keybinds.
-    auto& keybinds = out_manifest.keybinds;
-    keybinds.actionCount = 1; // Number of distinct actions defined by your plugin.
-    {
-        // --- Action 0: A sample keybind to toggle a window ---
-        auto& action = keybinds.actions[0];
-        // `groupName`: Logical grouping for actions, used to avoid name collisions.
-        // Best practice: "{PluginName}.{Feature}".
-        strncpy_s(action.groupName, "SPF_FrontalBlindspotViewer", sizeof(action.groupName));
-        // `actionName`: Specific action (e.g., "toggle", "activate").
-        strncpy_s(action.actionName, "toggle", sizeof(action.actionName));
-
-        // Define one or more default key combinations for this action.
-        action.definitionCount = 1;
+        // Keybinds
         {
-            // --- Definition 0 ---
-            auto& def = action.definitions[0];
-            // `type`: "keyboard" or "gamepad".
-            strncpy_s(def.type, "keyboard", sizeof(def.type));
-            // `key`: Key name (see VirtualKeyMapping.cpp or GamepadButtonMapping.cpp).
-            strncpy_s(def.key, "KEY_F10", sizeof(def.key));
-            // `pressType`: "short" (tap) or "long" (hold).
-            strncpy_s(def.pressType, "short", sizeof(def.pressType));
-            // `pressThresholdMs`: For "long" press, time in ms to hold.
-            def.pressThresholdMs = 0;
-            // `consume`: When to consume input: "never", "on_ui_focus", "always".
-            strncpy_s(def.consume, "always", sizeof(def.consume));
-            // `behavior`: How action behaves. Valid values: "toggle" (on/off), "hold" (while pressed).
-            strncpy_s(def.behavior, "toggle", sizeof(def.behavior));
+            api->Defaults_AddKeybind(h, "SPF_FrontalBlindspotViewer", "toggle", "keyboard", "KEY_F10", "short", 0, "always", "toggle");
         }
-    }
 
-    // --- Custom Settings Metadata ---
-    // Provide titles and descriptions for the settings defined in `settingsJson`.
-    
-    out_manifest.customSettingsMetadataCount = 12;
-    {
+        // =============================================================================================
+        // 2.5. Metadata for UI Display (Optional)
+        // =============================================================================================
+
+        // --- Custom Settings Metadata ---
+        
+        auto AddSliderMeta = [&](const char *key, const char *title, const char *desc, float min, float max, const char *format)
+        {
+            std::string params = "{ \"min\": " + std::to_string(min) + 
+                                 ", \"max\": " + std::to_string(max) + 
+                                 ", \"format\": \"" + format + "\" }";
+            api->Meta_AddCustomSetting(h, key, title, desc, "slider", params.c_str(), false);
+        };
+
         //--- Metadata for target_camera.position.x ---
-        auto& meta_pos_x = out_manifest.customSettingsMetadata[0];
-        strncpy_s(meta_pos_x.keyPath, "target_camera.position.x", sizeof(meta_pos_x.keyPath));
-        strncpy_s(meta_pos_x.titleKey, "settings.target_camera.position.x.title", sizeof(meta_pos_x.titleKey));
-        strncpy_s(meta_pos_x.keyPath, "target_camera.position.x", sizeof(meta_pos_x.keyPath));
-        strncpy_s(meta_pos_x.descriptionKey, "settings.target_camera.position.x.desc", sizeof(meta_pos_x.descriptionKey));
-        strncpy_s(meta_pos_x.widget, "slider", sizeof(meta_pos_x.widget));
-        meta_pos_x.widget_params.slider.min_val = -5.0f;
-        meta_pos_x.widget_params.slider.max_val = 5.0f;
-        strncpy_s(meta_pos_x.widget_params.slider.format, "%.3f", sizeof(meta_pos_x.widget_params.slider.format));
+        AddSliderMeta("target_camera.position.x", "settings.target_camera.position.x.title", "settings.target_camera.position.x.desc", -5.0f, 5.0f, "%.3f");
 
         //--- Metadata for target_camera.position.y ---
-        auto& meta_pos_y = out_manifest.customSettingsMetadata[1];
-        strncpy_s(meta_pos_y.keyPath, "target_camera.position.y", sizeof(meta_pos_y.keyPath));
-        strncpy_s(meta_pos_y.titleKey, "settings.target_camera.position.y.title", sizeof(meta_pos_y.titleKey));
-        strncpy_s(meta_pos_y.descriptionKey, "settings.target_camera.position.y.desc", sizeof(meta_pos_y.descriptionKey));
-        strncpy_s(meta_pos_y.widget, "slider", sizeof(meta_pos_y.widget));
-        meta_pos_y.widget_params.slider.min_val = -5.0f;
-        meta_pos_y.widget_params.slider.max_val = 5.0f;
-        strncpy_s(meta_pos_y.widget_params.slider.format, "%.3f", sizeof(meta_pos_y.widget_params.slider.format));
+        AddSliderMeta("target_camera.position.y", "settings.target_camera.position.y.title", "settings.target_camera.position.y.desc", -5.0f, 5.0f, "%.3f");
 
         //--- Metadata for target_camera.position.z ---
-        auto& meta_pos_z = out_manifest.customSettingsMetadata[2];
-        strncpy_s(meta_pos_z.keyPath, "target_camera.position.z", sizeof(meta_pos_z.keyPath));
-        strncpy_s(meta_pos_z.titleKey, "settings.target_camera.position.z.title", sizeof(meta_pos_z.titleKey));
-        strncpy_s(meta_pos_z.descriptionKey, "settings.target_camera.position.z.desc", sizeof(meta_pos_z.descriptionKey));
-        strncpy_s(meta_pos_z.widget, "slider", sizeof(meta_pos_z.widget));
-        meta_pos_z.widget_params.slider.min_val = -5.0f;
-        meta_pos_z.widget_params.slider.max_val = 5.0f;
-        strncpy_s(meta_pos_z.widget_params.slider.format, "%.3f", sizeof(meta_pos_z.widget_params.slider.format));
+        AddSliderMeta("target_camera.position.z", "settings.target_camera.position.z.title", "settings.target_camera.position.z.desc", -5.0f, 5.0f, "%.3f");
 
         //--- Metadata for target_camera.rotation.yaw ---
-        auto& meta_rot_yaw = out_manifest.customSettingsMetadata[3];
-        strncpy_s(meta_rot_yaw.keyPath, "target_camera.rotation.yaw", sizeof(meta_rot_yaw.keyPath));
-        strncpy_s(meta_rot_yaw.titleKey, "settings.target_camera.rotation.yaw.title", sizeof(meta_rot_yaw.titleKey));
-        strncpy_s(meta_rot_yaw.descriptionKey, "settings.target_camera.rotation.yaw.desc", sizeof(meta_rot_yaw.descriptionKey));
-        strncpy_s(meta_rot_yaw.widget, "slider", sizeof(meta_rot_yaw.widget));
-        meta_rot_yaw.widget_params.slider.min_val = -3.1415f;
-        meta_rot_yaw.widget_params.slider.max_val = 3.1415f;
-        strncpy_s(meta_rot_yaw.widget_params.slider.format, "%.3f", sizeof(meta_rot_yaw.widget_params.slider.format));
+        AddSliderMeta("target_camera.rotation.yaw", "settings.target_camera.rotation.yaw.title", "settings.target_camera.rotation.yaw.desc", -3.1415f, 3.1415f, "%.3f");
 
         //--- Metadata for target_camera.rotation.pitch ---
-        auto& meta_rot_pitch = out_manifest.customSettingsMetadata[4];
-        strncpy_s(meta_rot_pitch.keyPath, "target_camera.rotation.pitch", sizeof(meta_rot_pitch.keyPath));
-        strncpy_s(meta_rot_pitch.titleKey, "settings.target_camera.rotation.pitch.title", sizeof(meta_rot_pitch.titleKey));
-        strncpy_s(meta_rot_pitch.descriptionKey, "settings.target_camera.rotation.pitch.desc", sizeof(meta_rot_pitch.descriptionKey));
-        strncpy_s(meta_rot_pitch.widget, "slider", sizeof(meta_rot_pitch.widget));
-        meta_rot_pitch.widget_params.slider.min_val = -1.571f;
-        meta_rot_pitch.widget_params.slider.max_val = 1.571f;
-        strncpy_s(meta_rot_pitch.widget_params.slider.format, "%.3f", sizeof(meta_rot_pitch.widget_params.slider.format));
+        AddSliderMeta("target_camera.rotation.pitch", "settings.target_camera.rotation.pitch.title", "settings.target_camera.rotation.pitch.desc", -1.571f, 1.571f, "%.3f");
 
         //--- Metadata for target_camera.fov ---
-        auto& meta_fov = out_manifest.customSettingsMetadata[5];
-        strncpy_s(meta_fov.keyPath, "target_camera.fov", sizeof(meta_fov.keyPath));
-        strncpy_s(meta_fov.titleKey, "settings.target_camera.fov.title", sizeof(meta_fov.titleKey));
-        strncpy_s(meta_fov.descriptionKey, "settings.target_camera.fov.desc", sizeof(meta_fov.descriptionKey));
-        strncpy_s(meta_fov.widget, "slider", sizeof(meta_fov.widget));
-        meta_fov.widget_params.slider.min_val = 30.0f;
-        meta_fov.widget_params.slider.max_val = 120.0f;
-        strncpy_s(meta_fov.widget_params.slider.format, "%.1f", sizeof(meta_fov.widget_params.slider.format));
+        AddSliderMeta("target_camera.fov", "settings.target_camera.fov.title", "settings.target_camera.fov.desc", 30.0f, 120.0f, "%.1f");
 
         //--- Metadata for animation.speed ---
-        auto& meta_speed = out_manifest.customSettingsMetadata[6];
-        strncpy_s(meta_speed.keyPath, "animation.speed", sizeof(meta_speed.keyPath));
-        strncpy_s(meta_speed.titleKey, "settings.animation.speed.title", sizeof(meta_speed.titleKey));
-        strncpy_s(meta_speed.descriptionKey, "settings.animation.speed.desc", sizeof(meta_speed.descriptionKey));
-        strncpy_s(meta_speed.widget, "slider", sizeof(meta_speed.widget));
-        meta_speed.widget_params.slider.min_val = 0.1f;
-        meta_speed.widget_params.slider.max_val = 3.0f;
-        strncpy_s(meta_speed.widget_params.slider.format, "%.1f", sizeof(meta_speed.widget_params.slider.format));
+        AddSliderMeta("animation.speed", "settings.animation.speed.title", "settings.animation.speed.desc", 0.1f, 3.0f, "%.1f");
 
         //--- Metadata for animation.type ---
-        auto& meta_type = out_manifest.customSettingsMetadata[7];
-        strncpy_s(meta_type.keyPath, "animation.type", sizeof(meta_type.keyPath));
-        strncpy_s(meta_type.titleKey, "settings.animation.type.title", sizeof(meta_type.titleKey));
-        strncpy_s(meta_type.descriptionKey, "settings.animation.type.desc", sizeof(meta_type.descriptionKey));
-        strncpy_s(meta_type.widget, "combo", sizeof(meta_type.widget));
-        const char* animation_type_options = R"json([
+        const char* animation_type_options = R"json({ "options": [
             { "value": "linear", "labelKey": "settings.animation_type_options.Linear" },
             { "value": "live", "labelKey": "settings.animation_type_options.Live" }
-        ])json";
-        strncpy_s(meta_type.widget_params.choice.options_json, animation_type_options, sizeof(meta_type.widget_params.choice.options_json));
+        ]})json";
+        api->Meta_AddCustomSetting(h, "animation.type", "settings.animation.type.title", "settings.animation.type.desc", "combo", animation_type_options, false);
 
-        //--- Metadata for the "target_camera" group label ---
-        auto& meta_group_cam = out_manifest.customSettingsMetadata[8];
-        strncpy_s(meta_group_cam.keyPath, "target_camera", sizeof(meta_group_cam.keyPath));
-        strncpy_s(meta_group_cam.titleKey, "settings.groups.target_camera.title", sizeof(meta_group_cam.titleKey));
-        strncpy_s(meta_group_cam.descriptionKey, "settings.groups.target_camera.desc", sizeof(meta_group_cam.descriptionKey));
+        //--- Metadata for the group labels ---
+        api->Meta_AddCustomSetting(h, "target_camera", "settings.groups.target_camera.title", "settings.groups.target_camera.desc", nullptr, nullptr, false);
+        api->Meta_AddCustomSetting(h, "animation", "settings.groups.animation.title", "settings.groups.animation.desc", nullptr, nullptr, false);
+        api->Meta_AddCustomSetting(h, "target_camera.position", "settings.groups.target_camera.position.title", "settings.groups.target_camera.position.desc", nullptr, nullptr, false);
+        api->Meta_AddCustomSetting(h, "target_camera.rotation", "settings.groups.target_camera.rotation.title", "settings.groups.target_camera.rotation.desc", nullptr, nullptr, false);
 
-        //--- Metadata for the "animation" group label ---
-        auto& meta_group_anim = out_manifest.customSettingsMetadata[9];
-        strncpy_s(meta_group_anim.keyPath, "animation", sizeof(meta_group_anim.keyPath));
-        strncpy_s(meta_group_anim.titleKey, "settings.groups.animation.title", sizeof(meta_group_anim.titleKey));
-        strncpy_s(meta_group_anim.descriptionKey, "settings.groups.animation.desc", sizeof(meta_group_anim.descriptionKey));
-
-        //--- Metadata for the "position" group label ---
-        auto& meta_group_pos = out_manifest.customSettingsMetadata[10];
-        strncpy_s(meta_group_pos.keyPath, "target_camera.position", sizeof(meta_group_pos.keyPath));
-        strncpy_s(meta_group_pos.titleKey, "settings.groups.target_camera.position.title", sizeof(meta_group_pos.titleKey));
-        strncpy_s(meta_group_pos.descriptionKey, "settings.groups.target_camera.position.desc", sizeof(meta_group_pos.descriptionKey));
-
-        //--- Metadata for the "rotation" group label ---
-        auto& meta_group_rot = out_manifest.customSettingsMetadata[11];
-        strncpy_s(meta_group_rot.keyPath, "target_camera.rotation", sizeof(meta_group_rot.keyPath));
-        strncpy_s(meta_group_rot.titleKey, "settings.groups.target_camera.rotation.title", sizeof(meta_group_rot.titleKey));
-        strncpy_s(meta_group_rot.descriptionKey, "settings.groups.target_camera.rotation.desc", sizeof(meta_group_rot.descriptionKey));
+        // Keybind Metadata
+        api->Meta_AddKeybind(h, "SPF_FrontalBlindspotViewer", "toggle", "keybinds.toggle.title", "keybinds.toggle.desc");
     }
-
-    // --- Keybinds Metadata ---
-    // Provide titles and descriptions for the actions defined in `keybinds`.
-
-    out_manifest.keybindsMetadataCount = 1; // To enable keybinds metadata, uncomment the lines below and set the count accordingly.
-    {
-        auto& meta = out_manifest.keybindsMetadata[0];
-        strncpy_s(meta.groupName, "SPF_FrontalBlindspotViewer", sizeof(meta.groupName)); // Must match the action's groupName
-        strncpy_s(meta.actionName, "toggle", sizeof(meta.actionName));           // Must match the action's actionName
-        strncpy_s(meta.titleKey, "keybinds.toggle.title", sizeof(meta.titleKey));
-        strncpy_s(meta.descriptionKey, "keybinds.toggle.desc", sizeof(meta.descriptionKey));
-    }
-
-}
 
 // =================================================================================================
 // 3. Plugin Lifecycle Implementations
@@ -292,12 +153,12 @@ void OnLoad(const SPF_Load_API* load_api) {
     // --- Essential API Initialization ---
     // Get and cache the logger and formatting API handles.
     if (g_ctx.loadAPI) {
-        g_ctx.loggerHandle = g_ctx.loadAPI->logger->GetLogger(PLUGIN_NAME);
+        g_ctx.loggerHandle = g_ctx.loadAPI->logger->Log_GetContext(PLUGIN_NAME);
         g_ctx.formattingAPI = g_ctx.loadAPI->formatting;
 
         if (g_ctx.loggerHandle && g_ctx.formattingAPI) {
             char log_buffer[256];
-            g_ctx.formattingAPI->Format(log_buffer, sizeof(log_buffer), "%s has been loaded!", PLUGIN_NAME);
+            g_ctx.formattingAPI->Fmt_Format(log_buffer, sizeof(log_buffer), "%s has been loaded!", PLUGIN_NAME);
             g_ctx.loadAPI->logger->Log(g_ctx.loggerHandle, SPF_LOG_INFO, log_buffer);
         }
     }
@@ -309,13 +170,13 @@ void OnLoad(const SPF_Load_API* load_api) {
     // Config API
     // Requires: SPF_Config_API.h
     if (g_ctx.loadAPI && g_ctx.loadAPI->config) {
-        g_ctx.configHandle = g_ctx.loadAPI->config->GetContext(PLUGIN_NAME);
+        g_ctx.configHandle = g_ctx.loadAPI->config->Cfg_GetContext(PLUGIN_NAME);
     }
     
     // Localization API
     // Requires: SPF_Localization_API.h
     if (g_ctx.loadAPI && g_ctx.loadAPI->localization) {
-        g_ctx.localizationHandle = g_ctx.loadAPI->localization->GetContext(PLUGIN_NAME);
+        g_ctx.localizationHandle = g_ctx.loadAPI->localization->Loc_GetContext(PLUGIN_NAME);
     }
 }
 
@@ -324,7 +185,7 @@ void OnActivated(const SPF_Core_API* core_api) {
 
     if (g_ctx.loggerHandle && g_ctx.formattingAPI) {
         char log_buffer[256];
-        g_ctx.formattingAPI->Format(log_buffer, sizeof(log_buffer), "%s has been activated!", PLUGIN_NAME);
+        g_ctx.formattingAPI->Fmt_Format(log_buffer, sizeof(log_buffer), "%s has been activated!", PLUGIN_NAME);
         g_ctx.loadAPI->logger->Log(g_ctx.loggerHandle, SPF_LOG_INFO, log_buffer);
     }
 
@@ -335,10 +196,10 @@ void OnActivated(const SPF_Core_API* core_api) {
     // Keybinds API
     // Requires: SPF_KeyBinds_API.h
     if (g_ctx.coreAPI && g_ctx.coreAPI->keybinds) {
-        g_ctx.keybindsHandle = g_ctx.coreAPI->keybinds->GetContext(PLUGIN_NAME);
+        g_ctx.keybindsHandle = g_ctx.coreAPI->keybinds->Kbind_GetContext(PLUGIN_NAME);
         if (g_ctx.keybindsHandle) {
             // Register the callback for our "toggle" action.
-            g_ctx.coreAPI->keybinds->Register(g_ctx.keybindsHandle, "SPF_FrontalBlindspotViewer.toggle", OnKeybindAction);
+            g_ctx.coreAPI->keybinds->Kbind_Register(g_ctx.keybindsHandle, "SPF_FrontalBlindspotViewer.toggle", OnKeybindAction);
         }
     }
 
@@ -373,7 +234,7 @@ void OnUnload() {
 
     if (g_ctx.loadAPI && g_ctx.loggerHandle && g_ctx.formattingAPI) {
         char log_buffer[256];
-        g_ctx.formattingAPI->Format(log_buffer, sizeof(log_buffer), "%s is being unloaded.", PLUGIN_NAME);
+        g_ctx.formattingAPI->Fmt_Format(log_buffer, sizeof(log_buffer), "%s is being unloaded.", PLUGIN_NAME);
         g_ctx.loadAPI->logger->Log(g_ctx.loggerHandle, SPF_LOG_INFO, log_buffer);
     }
 
@@ -406,23 +267,23 @@ void LoadSettings() {
     auto config = g_ctx.loadAPI->config;
 
     // Load target camera position
-    g_ctx.target_pos[0] = config->GetFloat(g_ctx.configHandle, "settings.target_camera.position.x", g_ctx.target_pos[0]);
-    g_ctx.target_pos[1] = config->GetFloat(g_ctx.configHandle, "settings.target_camera.position.y", g_ctx.target_pos[1]);
-    g_ctx.target_pos[2] = config->GetFloat(g_ctx.configHandle, "settings.target_camera.position.z", g_ctx.target_pos[2]);
+    g_ctx.target_pos[0] = config->Cfg_GetFloat(g_ctx.configHandle, "settings.target_camera.position.x", g_ctx.target_pos[0]);
+    g_ctx.target_pos[1] = config->Cfg_GetFloat(g_ctx.configHandle, "settings.target_camera.position.y", g_ctx.target_pos[1]);
+    g_ctx.target_pos[2] = config->Cfg_GetFloat(g_ctx.configHandle, "settings.target_camera.position.z", g_ctx.target_pos[2]);
 
     // Load target camera rotation
-    g_ctx.target_rot[0] = config->GetFloat(g_ctx.configHandle, "settings.target_camera.rotation.yaw", g_ctx.target_rot[0]);
-    g_ctx.target_rot[1] = config->GetFloat(g_ctx.configHandle, "settings.target_camera.rotation.pitch", g_ctx.target_rot[1]);
+    g_ctx.target_rot[0] = config->Cfg_GetFloat(g_ctx.configHandle, "settings.target_camera.rotation.yaw", g_ctx.target_rot[0]);
+    g_ctx.target_rot[1] = config->Cfg_GetFloat(g_ctx.configHandle, "settings.target_camera.rotation.pitch", g_ctx.target_rot[1]);
 
     // Load target FOV
-    g_ctx.target_fov = config->GetFloat(g_ctx.configHandle, "settings.target_camera.fov", g_ctx.target_fov);
+    g_ctx.target_fov = config->Cfg_GetFloat(g_ctx.configHandle, "settings.target_camera.fov", g_ctx.target_fov);
 
     // Load animation speed
-    g_ctx.animation_speed = config->GetFloat(g_ctx.configHandle, "settings.animation.speed", g_ctx.animation_speed);
+    g_ctx.animation_speed = config->Cfg_GetFloat(g_ctx.configHandle, "settings.animation.speed", g_ctx.animation_speed);
 
     // Load animation type
     char anim_type_buffer[32];
-    config->GetString(g_ctx.configHandle, "settings.animation.type", g_ctx.animation_type.c_str(), anim_type_buffer, sizeof(anim_type_buffer));
+    config->Cfg_GetString(g_ctx.configHandle, "settings.animation.type", g_ctx.animation_type.c_str(), anim_type_buffer, sizeof(anim_type_buffer));
     g_ctx.animation_type = anim_type_buffer;
 }
 
@@ -459,9 +320,9 @@ void AnimateCamera(float deltaTime) {
         g_ctx.isAnimating = false;
 
         // Snap to final position to ensure precision
-        g_ctx.cameraAPI->SetInteriorSeatPos(end_pos_ptr[0], end_pos_ptr[1], end_pos_ptr[2]);
-        g_ctx.cameraAPI->SetInteriorHeadRot(end_rot_ptr[0], end_rot_ptr[1]);
-        g_ctx.cameraAPI->SetInteriorFov(end_fov);
+        g_ctx.cameraAPI->Cam_SetInteriorSeatPos(end_pos_ptr[0], end_pos_ptr[1], end_pos_ptr[2]);
+        g_ctx.cameraAPI->Cam_SetInteriorHeadRot(end_rot_ptr[0], end_rot_ptr[1]);
+        g_ctx.cameraAPI->Cam_SetInteriorFov(end_fov);
         return;
     }
 
@@ -533,9 +394,9 @@ void AnimateCamera(float deltaTime) {
     }
 
     // Apply the calculated values to the camera
-    g_ctx.cameraAPI->SetInteriorSeatPos(current_pos[0], current_pos[1], current_pos[2]);
-    g_ctx.cameraAPI->SetInteriorHeadRot(current_rot[0], current_rot[1]);
-    g_ctx.cameraAPI->SetInteriorFov(current_fov);
+    g_ctx.cameraAPI->Cam_SetInteriorSeatPos(current_pos[0], current_pos[1], current_pos[2]);
+    g_ctx.cameraAPI->Cam_SetInteriorHeadRot(current_rot[0], current_rot[1]);
+    g_ctx.cameraAPI->Cam_SetInteriorFov(current_fov);
 }
 // Implement these functions if your plugin needs to react to specific events.
 // Remember to also uncomment their prototypes in SPF_FrontalBlindspotViewer.hpp and register them
@@ -552,9 +413,9 @@ void OnSettingChanged(SPF_Config_Handle* config_handle, const char* keyPath) {
         if (strstr(keyPath, "target_camera.position") ||
             strstr(keyPath, "target_camera.rotation") ||
             strstr(keyPath, "target_camera.fov")) {
-            g_ctx.cameraAPI->SetInteriorSeatPos(g_ctx.target_pos[0], g_ctx.target_pos[1], g_ctx.target_pos[2]);
-            g_ctx.cameraAPI->SetInteriorHeadRot(g_ctx.target_rot[0], g_ctx.target_rot[1]);
-            g_ctx.cameraAPI->SetInteriorFov(g_ctx.target_fov);
+            g_ctx.cameraAPI->Cam_SetInteriorSeatPos(g_ctx.target_pos[0], g_ctx.target_pos[1], g_ctx.target_pos[2]);
+            g_ctx.cameraAPI->Cam_SetInteriorHeadRot(g_ctx.target_rot[0], g_ctx.target_rot[1]);
+            g_ctx.cameraAPI->Cam_SetInteriorFov(g_ctx.target_fov);
         }
     }
 }
@@ -567,9 +428,9 @@ void OnKeybindAction() {
 
     if (!g_ctx.isPeeking) {
         // Save current camera state
-        g_ctx.cameraAPI->GetInteriorSeatPos(&g_ctx.original_pos[0], &g_ctx.original_pos[1], &g_ctx.original_pos[2]);
-        g_ctx.cameraAPI->GetInteriorHeadRot(&g_ctx.original_rot[0], &g_ctx.original_rot[1]);
-        g_ctx.cameraAPI->GetInteriorFov(&g_ctx.original_fov);
+        g_ctx.cameraAPI->Cam_GetInteriorSeatPos(&g_ctx.original_pos[0], &g_ctx.original_pos[1], &g_ctx.original_pos[2]);
+        g_ctx.cameraAPI->Cam_GetInteriorHeadRot(&g_ctx.original_rot[0], &g_ctx.original_rot[1]);
+        g_ctx.cameraAPI->Cam_GetInteriorFov(&g_ctx.original_fov);
 
         // Start animating to peek position
         g_ctx.isPeeking = true;
@@ -597,7 +458,7 @@ extern "C" {
  */
 SPF_PLUGIN_EXPORT bool SPF_GetManifestAPI(SPF_Manifest_API* out_api) {
     if (out_api) {
-        out_api->GetManifestData = GetManifestData;
+        out_api->BuildManifest = BuildManifest;
         return true;
     }
     return false;
