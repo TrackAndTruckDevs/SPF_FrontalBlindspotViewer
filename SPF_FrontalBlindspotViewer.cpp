@@ -40,7 +40,7 @@ PluginContext g_ctx;
         {
             api->Info_SetName(h, PLUGIN_NAME);
             api->Info_SetVersion(h, "1.0.2");
-            api->Info_SetMinFrameworkVersion(h, "1.1.0");
+            api->Info_SetMinFrameworkVersion(h, "1.1.3");
             api->Info_SetAuthor(h, "Track'n'Truck Devs");
             api->Info_SetDescriptionKey(h, "plugin.description");
 
@@ -86,7 +86,7 @@ PluginContext g_ctx;
 
         // Keybinds
         {
-            api->Defaults_AddKeybind(h, "SPF_FrontalBlindspotViewer", "toggle", "keyboard", "KEY_F10", "short", 0, "always", "toggle");
+            api->Defaults_AddKeybind(h, "SPF_FrontalBlindspotViewer", "toggle", "keyboard", "KEY_F10", "always");
         }
 
         // =============================================================================================
