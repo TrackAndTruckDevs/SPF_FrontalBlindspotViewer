@@ -1,4 +1,17 @@
-# SPF Frontal Blindspot Viewer Plugin
+<h1 align="center">SPF Frontal Blindspot Viewer Plugin</h1>
+
+<p align="center">
+    <a href="https://github.com/TrackAndTruckDevs/SPF_FrontalBlindspotViewer/releases/latest/" target="_blank" title="SPF Frontal Blindspot Viewer Plugin"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/TrackAndTruckDevs/SPF_FrontalBlindspotViewer"></a>
+    <a href="/LICENSE" title="SPF Red Light Camera Plugin license"><img alt="GitHub License" src="https://img.shields.io/github/license/TrackAndTruckDevs/SPF_FrontalBlindspotViewer"></a>
+</p>
+
+<p align="center">
+    <a href="https://www.patreon.com/TrackAndTruckDevs" target="_blank" title="Support us on Patreon"><img alt="Patreon" src="https://img.shields.io/badge/patreon-Becoming a patron-3404021712?style=flat&logo=patreon"></a>
+    <a href="https://github.com/TrackAndTruckDevs/SPF_FrontalBlindspotViewer/stargazers" title="Liked it? Starred"><img src="https://img.shields.io/github/stars/TrackAndTruckDevs/SPF_FrontalBlindspotViewer?style=flat&logo=github" alt="Stars" /></a>
+    <a href="https://youtube.com/@TrackAndTruck" target="_blank" title="Subscribe to our channel"><img alt="Youtube" src="https://img.shields.io/badge/youtube-subscribe-orange?logo=youtube&style=flat"></a>
+</p>
+
+---
 
 A plugin for American Truck Simulator and Euro Truck Simulator 2 that provides a smooth, animated camera movement to let you easily see traffic lights when they are obstructed by your truck's A-pillar.
 

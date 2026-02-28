@@ -39,14 +39,15 @@ PluginContext g_ctx;
         // This section provides the basic identity of your plugin.
         {
             api->Info_SetName(h, PLUGIN_NAME);
-            api->Info_SetVersion(h, "1.0.3");
-            api->Info_SetMinFrameworkVersion(h, "1.1.3");
+            api->Info_SetVersion(h, "1.0.4");
+            api->Info_SetMinFrameworkVersion(h, "1.1.5");
             api->Info_SetAuthor(h, "Track'n'Truck Devs");
             api->Info_SetDescriptionKey(h, "plugin.description");
 
             api->Info_SetEmail(h, "mailto:spf.framework@gmail.com");
             api->Info_SetYoutubeUrl(h, "https://www.youtube.com/@TrackAndTruck");
             api->Info_SetPatreonUrl(h, "https://www.patreon.com/TrackAndTruckDevs");
+            api->Info_SetGithubUrl(h, "https://github.com/TrackAndTruckDevs/SPF_FrontalBlindspotViewer");
         }
 
 
