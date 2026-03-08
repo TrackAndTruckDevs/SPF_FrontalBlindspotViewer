@@ -39,8 +39,8 @@ PluginContext g_ctx;
         // This section provides the basic identity of your plugin.
         {
             api->Info_SetName(h, PLUGIN_NAME);
-            api->Info_SetVersion(h, "1.0.4");
-            api->Info_SetMinFrameworkVersion(h, "1.1.5");
+            api->Info_SetVersion(h, "1.1.6");
+            api->Info_SetMinFrameworkVersion(h, "1.1.6");
             api->Info_SetAuthor(h, "Track'n'Truck Devs");
             api->Info_SetDescriptionKey(h, "plugin.description");
 
