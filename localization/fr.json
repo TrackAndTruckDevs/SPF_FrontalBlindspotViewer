@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "Un plugin qui améliore la visibilité de l'angle mort avant grâce à des mouvements de caméra animés dans Euro Truck Simulator 2 et American Truck Simulator.",
+    "settings": {
+        "target_camera.position.x.title": "Position cible X",
+        "target_camera.position.x.desc": "Décalage de position gauche/droite par rapport au siège.",
+        "target_camera.position.y.title": "Position cible Y",
+        "target_camera.position.y.desc": "Décalage de position haut/bas par rapport au siège.",
+        "target_camera.position.z.title": "Position cible Z",
+        "target_camera.position.z.desc": "Décalage de position avant/arrière par rapport au siège.",
+        "target_camera.rotation.yaw.title": "Rotation cible Yaw (Lacet)",
+        "target_camera.rotation.yaw.desc": "Rotation horizontale (regarder à gauche/droite).",
+        "target_camera.rotation.pitch.title": "Rotation cible Pitch (Tangage)",
+        "target_camera.rotation.pitch.desc": "Rotation verticale (regarder en haut/bas).",
+        "target_camera.fov.title": "Champ de vision cible (FOV)",
+        "target_camera.fov.desc": "Le champ de vision de la caméra lorsque vous vous penchez.",
+        "animation.speed.title": "Vitesse de l'animation",
+        "animation.speed.desc": "La vitesse à laquelle la caméra se déplace vers la position cible.",
+        "animation.type.title": "Type d'animation",
+        "animation.type.desc": "Le style d'animation de la caméra. 'Linear' est une trajectoire directe. 'Driver Lean' simule l'inclinaison naturelle du conducteur vers l'avant. 'Windshield Peek' penche vers le pare-brise pour voir les feux en hauteur. 'Head Raise' se concentre sur un léger regard vers le haut.",
+        "animation_type_options": {
+            "Linear": "Linéaire (Linear)",
+            "DriverLean": "Inclinaison du conducteur (Driver Lean)",
+            "WindshieldPeek": "Coup d'œil au pare-brise (Windshield Peek)",
+            "HeadRaise": "Élévation de la tête (Head Raise)"
+        },
+        "groups.target_camera.title": "Paramètres de la caméra cible",
+        "groups.target_camera.desc": "Paramètres pour la position finale et l'orientation de la caméra lorsque vous vous penchez.",
+        "groups.animation.title": "Paramètres de l'animation",
+        "groups.animation.desc": "Contrôle l'animation de transition de la caméra.",
+        "groups.target_camera.position.title": "Position",
+        "groups.target_camera.position.desc": "Décalage de position par rapport au siège.",
+        "groups.target_camera.rotation.title": "Rotation",
+        "groups.target_camera.rotation.desc": "Décalage de rotation par rapport au siège."
+    },
+    "keybinds": {
+        "toggle.title": "Basculer la vue coup d'œil",
+        "toggle.desc": "Appuyez pour vous pencher en avant et voir l'angle mort. Appuyez à nouveau pour revenir."
+    }
+}

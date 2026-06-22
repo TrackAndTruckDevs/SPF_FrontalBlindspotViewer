@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "Wtyczka poprawiająca widoczność przedniego martwego punktu poprzez animowane ruchy kamery w Euro Truck Simulator 2 oraz American Truck Simulator.",
+    "settings": {
+        "target_camera.position.x.title": "Pozycja docelowa X",
+        "target_camera.position.x.desc": "Przesunięcie pozycji w lewo/prawo względem fotela.",
+        "target_camera.position.y.title": "Pozycja docelowa Y",
+        "target_camera.position.y.desc": "Przesunięcie pozycji w górę/dół względem fotela.",
+        "target_camera.position.z.title": "Pozycja docelowa Z",
+        "target_camera.position.z.desc": "Przesunięcie pozycji w przód/tył względem fotela.",
+        "target_camera.rotation.yaw.title": "Rotacja docelowa Yaw (Odchylenie)",
+        "target_camera.rotation.yaw.desc": "Rotacja pozioma (rozglądanie się w lewo/prawo).",
+        "target_camera.rotation.pitch.title": "Rotacja docelowa Pitch (Pochylenie)",
+        "target_camera.rotation.pitch.desc": "Rotacja pionowa (rozglądanie się w górę/dół).",
+        "target_camera.fov.title": "Docelowe pole widzenia (FOV)",
+        "target_camera.fov.desc": "Pole widzenia kamery podczas wychylania się.",
+        "animation.speed.title": "Prędkość animacji",
+        "animation.speed.desc": "Jak szybko kamera przemieszcza się do pozycji docelowej.",
+        "animation.type.title": "Typ animacji",
+        "animation.type.desc": "Styl animacji kamery. 'Linear' to ruch po linii prostej. 'Driver Lean' imituje naturalne wychylenie kierowcy do przodu. 'Windshield Peek' to wychylenie w stronę przedniej szyby, ułatwiające widoczność wysokich sygnalizatorów. 'Head Raise' skupia się na lekkim uniesieniu wzroku w górę.",
+        "animation_type_options": {
+            "Linear": "Liniowa (Linear)",
+            "DriverLean": "Wychylenie kierowcy (Driver Lean)",
+            "WindshieldPeek": "Wychylenie do szyby (Windshield Peek)",
+            "HeadRaise": "Uniesienie głowy (Head Raise)"
+        },
+        "groups.target_camera.title": "Ustawienia kamery docelowej",
+        "groups.target_camera.desc": "Parametry końcowej pozycji i orientacji kamery podczas wychylania się.",
+        "groups.animation.title": "Ustawienia animacji",
+        "groups.animation.desc": "Kontroluje animację przejścia kamery.",
+        "groups.target_camera.position.title": "Pozycja",
+        "groups.target_camera.position.desc": "Przesunięcie pozycji względem fotela.",
+        "groups.target_camera.rotation.title": "Rotacja",
+        "groups.target_camera.rotation.desc": "Przesunięcie rotacji względem fotela."
+    },
+    "keybinds": {
+        "toggle.title": "Przełącz widok wychylenia",
+        "toggle.desc": "Naciśnij, aby wychylić się do przodu i sprawdzić martwy punkt. Naciśnij ponownie, aby powrócić."
+    }
+}

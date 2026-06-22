@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "Плагін, що покращує огляд передньої сліпої зони за допомогою анімованих рухів камери в Euro Truck Simulator 2 та American Truck Simulator.",
+    "settings": {
+        "target_camera.position.x.title": "Цільова позиція X",
+        "target_camera.position.x.desc": "Зміщення позиції вліво/вправо відносно крісла.",
+        "target_camera.position.y.title": "Цільова позиція Y",
+        "target_camera.position.y.desc": "Зміщення позиції вгору/вниз відносно крісла.",
+        "target_camera.position.z.title": "Цільова позиція Z",
+        "target_camera.position.z.desc": "Зміщення позиції вперед/назад відносно крісла.",
+        "target_camera.rotation.yaw.title": "Цільовий поворот Yaw (Рискання)",
+        "target_camera.rotation.yaw.desc": "Горизонтальний поворот (подивитися ліворуч/праворуч).",
+        "target_camera.rotation.pitch.title": "Цільовий поворот Pitch (Тангаж)",
+        "target_camera.rotation.pitch.desc": "Вертикальний поворот (подивитися вгору/вниз).",
+        "target_camera.fov.title": "Цільовий кут обзору (FOV)",
+        "target_camera.fov.desc": "Кут обзору камери під час визирання.",
+        "animation.speed.title": "Швидкість анімації",
+        "animation.speed.desc": "Як швидко камера переміщується в цільову позицію.",
+        "animation.type.title": "Тип анімації",
+        "animation.type.desc": "Стиль анімації камери. «Linear» — це рух по прямій лінії. «Driver Lean» імітує природний нахил водія вперед. «Windshield Peek» — це нахил до лобового скла для обзору верхніх світлофорів. «Head Raise» фокусується на легкому піднятті погляду вгору.",
+        "animation_type_options": {
+            "Linear": "Лінійна (Linear)",
+            "DriverLean": "Накхил водія (Driver Lean)",
+            "WindshieldPeek": "Накхил до скла (Windshield Peek)",
+            "HeadRaise": "Підняття голови (Head Raise)"
+        },
+        "groups.target_camera.title": "Налаштування цільової камери",
+        "groups.target_camera.desc": "Параметри кінцевого положення та орієнтації камери під час визирання.",
+        "groups.animation.title": "Налаштування анімації",
+        "groups.animation.desc": "Керування анімацією переходу камери.",
+        "groups.target_camera.position.title": "Позиція",
+        "groups.target_camera.position.desc": "Зміщення позиції відносно крісла.",
+        "groups.target_camera.rotation.title": "Поворот",
+        "groups.target_camera.rotation.desc": "Зміщення обертання відносно крісла."
+    },
+    "keybinds": {
+        "toggle.title": "Перемикнути вигляд визирання",
+        "toggle.desc": "Натисніть, щоб нахилитися вперед і оглянути сліпу зону. Натисніть ще раз, щоб повернутися."
+    }
+}

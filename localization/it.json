@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "Un plugin che migliora la visuale dell'angolo cieco frontale tramite movimenti animati della telecamera in Euro Truck Simulator 2 e American Truck Simulator.",
+    "settings": {
+        "target_camera.position.x.title": "Posizione obiettivo X",
+        "target_camera.position.x.desc": "Scostamento di posizione sinistra/destra rispetto al sedile.",
+        "target_camera.position.y.title": "Posizione obiettivo Y",
+        "target_camera.position.y.desc": "Scostamento di posizione su/giù rispetto al sedile.",
+        "target_camera.position.z.title": "Posizione obiettivo Z",
+        "target_camera.position.z.desc": "Scostamento di posizione avanti/indietro rispetto al sedile.",
+        "target_camera.rotation.yaw.title": "Rotazione obiettivo Yaw (Imbardata)",
+        "target_camera.rotation.yaw.desc": "Rotazione orizzontale (guardare a sinistra/destra).",
+        "target_camera.rotation.pitch.title": "Rotazione obiettivo Pitch (Beccheggio)",
+        "target_camera.rotation.pitch.desc": "Rotazione verticale (guardare in alto/basso).",
+        "target_camera.fov.title": "Campo visivo obiettivo (FOV)",
+        "target_camera.fov.desc": "Il campo visivo (Field of View) della telecamera quando ci si sporge.",
+        "animation.speed.title": "Velocità animazione",
+        "animation.speed.desc": "La velocità con cui la telecamera si muove verso la posizione obiettivo.",
+        "animation.type.title": "Tipo di animazione",
+        "animation.type.desc": "Lo stile dell'animazione della telecamera. 'Linear' è una traiettoria diretta. 'Driver Lean' simula la naturale inclinazione del guidatore in avanti. 'Windshield Peek' si sporge verso il parabrezza per vedere i semafori alti. 'Head Raise' si concentra su un piccolo sguardo verso l'alto.",
+        "animation_type_options": {
+            "Linear": "Lineare (Linear)",
+            "DriverLean": "Inclinazione guidatore (Driver Lean)",
+            "WindshieldPeek": "Sguardo al parabrezza (Windshield Peek)",
+            "HeadRaise": "Sollevamento testa (Head Raise)"
+        },
+        "groups.target_camera.title": "Impostazioni telecamera obiettivo",
+        "groups.target_camera.desc": "Parametri per la posizione finale e l'orientamento della telecamera quando ci si sporge.",
+        "groups.animation.title": "Impostazioni animazione",
+        "groups.animation.desc": "Controlla l'animazione di transizione della telecamera.",
+        "groups.target_camera.position.title": "Posizione",
+        "groups.target_camera.position.desc": "Scostamento di posizione rispetto al sedile.",
+        "groups.target_camera.rotation.title": "Rotazione",
+        "groups.target_camera.rotation.desc": "Scostamento di rotazione rispetto al sedile."
+    },
+    "keybinds": {
+        "toggle.title": "Attiva/Disattiva visuale sporgente",
+        "toggle.desc": "Premi per sporgerti in avanti e vedere l'angolo cieco. Premi di nuovo per tornare alla posizione normale."
+    }
+}

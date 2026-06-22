@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "Um plugin que melhora a visão do ponto cego frontal por meio de movimentos de câmera animados no Euro Truck Simulator 2 e American Truck Simulator.",
+    "settings": {
+        "target_camera.position.x.title": "Posição Alvo X",
+        "target_camera.position.x.desc": "Deslocamento de posição para a esquerda/direita em relação ao banco.",
+        "target_camera.position.y.title": "Posição Alvo Y",
+        "target_camera.position.y.desc": "Deslocamento de posição para cima/baixo em relação ao banco.",
+        "target_camera.position.z.title": "Posição Alvo Z",
+        "target_camera.position.z.desc": "Deslocamento de posição para frente/trás em relação ao banco.",
+        "target_camera.rotation.yaw.title": "Rotação Alvo Yaw (Guinada)",
+        "target_camera.rotation.yaw.desc": "Rotação horizontal (olhar para a esquerda/direita).",
+        "target_camera.rotation.pitch.title": "Rotação Alvo Pitch (Arfagem)",
+        "target_camera.rotation.pitch.desc": "Rotação vertical (olhar para cima/baixo).",
+        "target_camera.fov.title": "Campo de Visão Alvo (FOV)",
+        "target_camera.fov.desc": "O Campo de Visão da câmera ao inclinar-se para espiar.",
+        "animation.speed.title": "Velocidade da Animação",
+        "animation.speed.desc": "Quão rápido a câmera se move até a posição alvo.",
+        "animation.type.title": "Tipo de Animação",
+        "animation.type.desc": "O estilo da animação da câmera. 'Linear' é uma trajetória direta. 'Driver Lean' imita a inclinação natural do motorista para a frente. 'Windshield Peek' inclina-se em direção ao para-brisa para enxergar semáforos altos. 'Head Raise' foca em um leve erguer de cabeça.",
+        "animation_type_options": {
+            "Linear": "Linear",
+            "DriverLean": "Inclinação do Motorista (Driver Lean)",
+            "WindshieldPeek": "Espiar pelo Para-brisa (Windshield Peek)",
+            "HeadRaise": "Erguer de Cabeça (Head Raise)"
+        },
+        "groups.target_camera.title": "Configurações da Câmera Alvo",
+        "groups.target_camera.desc": "Parâmetros para a posição final e orientação da câmera ao inclinar-se para espiar.",
+        "groups.animation.title": "Configurações de Animação",
+        "groups.animation.desc": "Controla a animação de transição da câmera.",
+        "groups.target_camera.position.title": "Posição",
+        "groups.target_camera.position.desc": "Deslocamento de posição em relação ao banco.",
+        "groups.target_camera.rotation.title": "Rotação",
+        "groups.target_camera.rotation.desc": "Deslocamento de rotação em relação ao banco."
+    },
+    "keybinds": {
+        "toggle.title": "Alternar Visão de Espiar",
+        "toggle.desc": "Pressione para inclinar-se para a frente e ver o ponto cego. Pressione novamente para retornar."
+    }
+}

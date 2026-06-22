@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "Плагин, улучшающий обзор передней слепой зоны с помощью анимированных движений камеры в Euro Truck Simulator 2 и American Truck Simulator.",
+    "settings": {
+        "target_camera.position.x.title": "Целевая позиция X",
+        "target_camera.position.x.desc": "Смещение позиции влево/вправо относительно кресла.",
+        "target_camera.position.y.title": "Целевая позиция Y",
+        "target_camera.position.y.desc": "Смещение позиции вверх/вниз относительно кресла.",
+        "target_camera.position.z.title": "Целевая позиция Z",
+        "target_camera.position.z.desc": "Смещение позиции вперед/назад относительно кресла.",
+        "target_camera.rotation.yaw.title": "Целевой поворот Yaw (Рыскание)",
+        "target_camera.rotation.yaw.desc": "Горизонтальный поворот (посмотреть влево/вправо).",
+        "target_camera.rotation.pitch.title": "Целевой поворот Pitch (Тангаж)",
+        "target_camera.rotation.pitch.desc": "Вертикальный поворот (посмотреть вверх/вниз).",
+        "target_camera.fov.title": "Целевой угол обзора (FOV)",
+        "target_camera.fov.desc": "Угол обзора камеры во время выглядывания.",
+        "animation.speed.title": "Скорость анимации",
+        "animation.speed.desc": "Как быстро камера перемещается в целевую позицию.",
+        "animation.type.title": "Тип анимации",
+        "animation.type.desc": "Стиль анимации камеры. «Linear» — это движение по прямой линии. «Driver Lean» имитирует естественный наклон водителя вперед. «Windshield Peek» — это наклон к лобовому стеклу для обзора верхних светофоров. «Head Raise» фокусируется на легком приподнятии взгляда вверх.",
+        "animation_type_options": {
+            "Linear": "Линейная (Linear)",
+            "DriverLean": "Наклон водителя (Driver Lean)",
+            "WindshieldPeek": "Наклон к стеклу (Windshield Peek)",
+            "HeadRaise": "Приподнятие головы (Head Raise)"
+        },
+        "groups.target_camera.title": "Настройки целевой камеры",
+        "groups.target_camera.desc": "Параметры конечного положения и ориентации камеры при выглядывании.",
+        "groups.animation.title": "Настройки анимации",
+        "groups.animation.desc": "Управление анимацией перехода камеры.",
+        "groups.target_camera.position.title": "Позиция",
+        "groups.target_camera.position.desc": "Смещение позиции относительно кресла.",
+        "groups.target_camera.rotation.title": "Поворот",
+        "groups.target_camera.rotation.desc": "Смещение вращения относительно кресла."
+    },
+    "keybinds": {
+        "toggle.title": "Переключить вид выглядывания",
+        "toggle.desc": "Нажмите, чтобы наклониться вперед и осмотреть слепую зону. Нажмите еще раз, чтобы вернуться."
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "Euro Truck Simulator 2 ve American Truck Simulator'da hareketli kamera animasyonları ile ön kör nokta görüşünü iyileştiren bir eklenti.",
+    "settings": {
+        "target_camera.position.x.title": "Hedef Pozisyon X",
+        "target_camera.position.x.desc": "Koltuk pozisyonuna göre sol/sağ konum kayması (offset).",
+        "target_camera.position.y.title": "Hedef Pozisyon Y",
+        "target_camera.position.y.desc": "Koltuk pozisyonuna göre yukarı/aşağı konum kayması (offset).",
+        "target_camera.position.z.title": "Hedef Pozisyon Z",
+        "target_camera.position.z.desc": "Koltuk pozisyonuna göre ileri/geri konum kayması (offset).",
+        "target_camera.rotation.yaw.title": "Hedef Rotasyon Yaw (Sapma)",
+        "target_camera.rotation.yaw.desc": "Yatay döndürme (sola/sağa bakış).",
+        "target_camera.rotation.pitch.title": "Hedef Rotasyon Pitch (Yunuslama)",
+        "target_camera.rotation.pitch.desc": "Dikey döndürme (yukarı/aşağı bakış).",
+        "target_camera.fov.title": "Hedef Görüş Açısı (FOV)",
+        "target_camera.fov.desc": "Öne doğru eğilip bakarken kameranın Görüş Açısı (Field of View).",
+        "animation.speed.title": "Animasyon Hızı",
+        "animation.speed.desc": "Kameranın hedef pozisyona ne kadar hızlı hareket edeceği.",
+        "animation.type.title": "Animasyon Türü",
+        "animation.type.desc": "Kamera animasyonunun tarzı. 'Linear' doğrudan bir hat izler. 'Driver Lean' sürücünün doğal bir şekilde öne eğilmesini simüle eder. 'Windshield Peek' yüksekteki trafik ışıklarını görmek için ön cama doğru eğilir. 'Head Raise' hafifçe yukarıya doğru bakmaya odaklanır.",
+        "animation_type_options": {
+            "Linear": "Lineer (Linear)",
+            "DriverLean": "Sürücü Eğilmesi (Driver Lean)",
+            "WindshieldPeek": "Ön Cama Eğilme (Windshield Peek)",
+            "HeadRaise": "Baş Kaldırma (Head Raise)"
+        },
+        "groups.target_camera.title": "Hedef Kamera Ayarları",
+        "groups.target_camera.desc": "Öne doğru eğilip bakarken kameranın nihai pozisyonu ve yönelim parametreleri.",
+        "groups.animation.title": "Animasyon Ayarları",
+        "groups.animation.desc": "Kamera geçiş animasyonunu kontrol eder.",
+        "groups.target_camera.position.title": "Pozisyon",
+        "groups.target_camera.position.desc": "Koltuk pozisyonuna göre konum kayması.",
+        "groups.target_camera.rotation.title": "Rotasyon",
+        "groups.target_camera.rotation.desc": "Koltuk pozisyonuna göre rotasyon kayması."
+    },
+    "keybinds": {
+        "toggle.title": "Eğilerek Bakış Görünümünü Aç/Kapat",
+        "toggle.desc": "Öne doğru eğilip kör noktayı görmek için basın. Geri dönmek için tekrar basın."
+    }
+}

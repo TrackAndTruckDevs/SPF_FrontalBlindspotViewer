@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "一款通过动画相机移动来增强《欧洲卡车模拟2》和《美洲卡车模拟》中前方盲区视野的插件。",
+    "settings": {
+        "target_camera.position.x.title": "目标位置 X",
+        "target_camera.position.x.desc": "相对于座椅的左右位置偏移。",
+        "target_camera.position.y.title": "目标位置 Y",
+        "target_camera.position.y.desc": "相对于座椅的上下位置偏移。",
+        "target_camera.position.z.title": "目标位置 Z",
+        "target_camera.position.z.desc": "相对于座椅的前后位置偏移。",
+        "target_camera.rotation.yaw.title": "目标偏航角 (Yaw)",
+        "target_camera.rotation.yaw.desc": "水平方向旋转（向左/向右看）。",
+        "target_camera.rotation.pitch.title": "目标俯仰角 (Pitch)",
+        "target_camera.rotation.pitch.desc": "垂直方向旋转（向上/向下看）。",
+        "target_camera.fov.title": "目标视野 (FOV)",
+        "target_camera.fov.desc": "探头探身查看时相机的视野角度（Field of View）。",
+        "animation.speed.title": "动画速度",
+        "animation.speed.desc": "相机移动到目标位置的速度。",
+        "animation.type.title": "动画类型",
+        "animation.type.desc": "相机动画的风格。“Linear” 为线性直线轨迹。“Driver Lean” 模拟驾驶员自然向前探身。“Windshield Peek” 向挡风玻璃倾斜以观察高处的交通信号灯。“Head Raise” 侧重于微微抬头向上看。",
+        "animation_type_options": {
+            "Linear": "线性 (Linear)",
+            "DriverLean": "驾驶员探身 (Driver Lean)",
+            "WindshieldPeek": "挡风玻璃窥视 (Windshield Peek)",
+            "HeadRaise": "抬头 (Head Raise)"
+        },
+        "groups.target_camera.title": "目标相机设置",
+        "groups.target_camera.desc": "探头查看时相机的最终位置与朝向参数。",
+        "groups.animation.title": "动画设置",
+        "groups.animation.desc": "控制相机过渡的动画效果。",
+        "groups.target_camera.position.title": "位置",
+        "groups.target_camera.position.desc": "相对于座椅的位置偏移。",
+        "groups.target_camera.rotation.title": "旋转",
+        "groups.target_camera.rotation.desc": "相对于座椅的旋转偏移。"
+    },
+    "keybinds": {
+        "toggle.title": "切换探头视角",
+        "toggle.desc": "按下此键向前探身以观察前方盲区。再次按下即可恢复原位。"
+    }
+}

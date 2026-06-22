@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "Een plugin die het zicht op de voorste dode hoek verbetert door middel van geanimeerde camerabewegingen in Euro Truck Simulator 2 en American Truck Simulator.",
+    "settings": {
+        "target_camera.position.x.title": "Doelpositie X",
+        "target_camera.position.x.desc": "Links/rechts positieverschuiving ten opzichte van de stoel.",
+        "target_camera.position.y.title": "Doelpositie Y",
+        "target_camera.position.y.desc": "Omhoog/omlaag positieverschuiving ten opzichte van de stoel.",
+        "target_camera.position.z.title": "Doelpositie Z",
+        "target_camera.position.z.desc": "Voorwaarts/achterwaarts positieverschuiving ten opzichte van de stoel.",
+        "target_camera.rotation.yaw.title": "Doelrotatie Yaw (Gieren)",
+        "target_camera.rotation.yaw.desc": "Horizontale rotatie (links/rechts kijken).",
+        "target_camera.rotation.pitch.title": "Doelrotatie Pitch (Stampen)",
+        "target_camera.rotation.pitch.desc": "Verticale rotatie (omhoog/omlaag kijken).",
+        "target_camera.fov.title": "Doelgrootte gezichtsveld (FOV)",
+        "target_camera.fov.desc": "Het gezichtsveld (Field of View) van de camera tijdens het leunen.",
+        "animation.speed.title": "Animationsnelheid",
+        "animation.speed.desc": "Hoe snel de camera naar de doelpositie beweegt.",
+        "animation.type.title": "Animationstype",
+        "animation.type.desc": "De stijl van de camera-animatie. 'Linear' is een direct pad. 'Driver Lean' simuleert het natuurlijke vooroverleunen van de chauffeur. 'Windshield Peek' leunt naar de voorruit om hoge verkeerslichten te zien. 'Head Raise' focust op een kleine blik omhoog.",
+        "animation_type_options": {
+            "Linear": "Lineair (Linear)",
+            "DriverLean": "Chauffeur Leunen (Driver Lean)",
+            "WindshieldPeek": "Voorruit Blik (Windshield Peek)",
+            "HeadRaise": "Hoofd Opheffen (Head Raise)"
+        },
+        "groups.target_camera.title": "Instellingen doelcamera",
+        "groups.target_camera.desc": "Parameters voor de eindpositie en oriëntatie van de camera tijdens het leunen.",
+        "groups.animation.title": "Instellingen animatie",
+        "groups.animation.desc": "Regelt de overgangsanimatie van de camera.",
+        "groups.target_camera.position.title": "Positie",
+        "groups.target_camera.position.desc": "Positieverschuiving ten opzichte van de stoel.",
+        "groups.target_camera.rotation.title": "Rotatie",
+        "groups.target_camera.rotation.desc": "Rotatieverschuiving ten opzichte van de stoel."
+    },
+    "keybinds": {
+        "toggle.title": "Leunweergave in-/uitschakelen",
+        "toggle.desc": "Druk op deze knop om naar voren te leunen en de dode hoek te bekijken. Druk nogmaals om terug te keren."
+    }
+}

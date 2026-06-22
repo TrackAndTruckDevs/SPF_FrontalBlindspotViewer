@@ -81,8 +81,8 @@ namespace SPF_FrontalBlindspotViewer
         // This section provides the basic identity of your plugin.
         {
             api->Info_SetName(h, PLUGIN_NAME);
-            api->Info_SetVersion(h, "1.1.7");
-            api->Info_SetMinFrameworkVersion(h, "1.1.7");
+            api->Info_SetVersion(h, "1.1.8");
+            api->Info_SetMinFrameworkVersion(h, "1.2.0");
             api->Info_SetAuthor(h, "Track'n'Truck Devs");
             api->Info_SetDescriptionKey(h, "plugin.description");
 
@@ -169,7 +169,9 @@ namespace SPF_FrontalBlindspotViewer
         //--- Metadata for animation.type ---
         const char *animation_type_options = R"json({ "options": [
             { "value": "linear", "labelKey": "settings.animation_type_options.Linear" },
-            { "value": "live", "labelKey": "settings.animation_type_options.Live" }
+            { "value": "live", "labelKey": "settings.animation_type_options.DriverLean" },
+            { "value": "windshield_peek", "labelKey": "settings.animation_type_options.WindshieldPeek" },
+            { "value": "head_raise", "labelKey": "settings.animation_type_options.HeadRaise" }
         ]})json";
         api->Meta_AddCustomSetting(h, "animation.type", "settings.animation.type.title", "settings.animation.type.desc", "combo", animation_type_options, false);
 
@@ -399,57 +401,92 @@ namespace SPF_FrontalBlindspotViewer
         float current_rot[2];
         float current_fov;
 
+        auto clamp01 = [](float t)
+        {
+            return std::fmax(0.0f, std::fmin(1.0f, t));
+        };
+
+        auto remap01 = [&](float t, float in0, float in1)
+        {
+            return clamp01((t - in0) / (in1 - in0));
+        };
+
+        auto smoothStep = [&](float t)
+        {
+            t = clamp01(t);
+            return t * t * (3.0f - 2.0f * t);
+        };
+
+        auto easeOutCubic = [&](float t)
+        {
+            t = clamp01(t);
+            float inv = 1.0f - t;
+            return 1.0f - inv * inv * inv;
+        };
+
+        auto lerp = [](float a, float b, float t)
+        {
+            return a + (b - a) * t;
+        };
+
         if (g_ctx.animation_type == "live")
         {
-            // --- Live Animation Logic using a Bezier Curve ---
+            // --- Driver Lean: balanced motion with a late head lift ---
             float p = g_ctx.animation_progress;
 
-            // A single, consistent easing for the entire animation path
-            auto easeInOutCubic = [](float t)
-            { return t < 0.5 ? 4 * t * t * t : 1 - std::pow(-2 * t + 2, 3) / 2; };
-            float eased_p = easeInOutCubic(p);
+            float pos_t = smoothStep(p);
+            float yaw_t = smoothStep(p);
+            float pitch_t = smoothStep(remap01(p, 0.58f, 1.0f));
+            float fov_t = smoothStep(p);
 
-            // --- POSITION: Calculated along a Quadratic Bezier Curve ---
-            // This creates a natural arc instead of moving along straight axes.
-            // P0 is the start point.
-            // P2 is the end point.
-            // P1 is the control point that "pulls" the curve into an arc.
+            current_pos[0] = lerp(start_pos_ptr[0], end_pos_ptr[0], pos_t);
+            current_pos[1] = lerp(start_pos_ptr[1], end_pos_ptr[1], pos_t);
+            current_pos[2] = lerp(start_pos_ptr[2], end_pos_ptr[2], pos_t);
 
-            float p1[3]; // The control point
-            // The horizontal position of the control point depends on the animation direction
-            // to make the "lift" feel natural when returning to the seat.
-            float horizontal_factor = g_ctx.isPeeking ? 0.2f : 0.8f;
-            p1[0] = start_pos_ptr[0] + (end_pos_ptr[0] - start_pos_ptr[0]) * horizontal_factor;
-            p1[2] = start_pos_ptr[2] + (end_pos_ptr[2] - start_pos_ptr[2]) * horizontal_factor;
+            current_rot[0] = lerp(start_rot_ptr[0], end_rot_ptr[0], yaw_t);
+            current_rot[1] = lerp(start_rot_ptr[1], end_rot_ptr[1], pitch_t);
 
-            // Use the arc height fine-tuned by the user.
-            p1[1] = std::fmax(start_pos_ptr[1], end_pos_ptr[1]) + 0.15f;
+            current_fov = lerp(start_fov, end_fov, fov_t);
+        }
+        else if (g_ctx.animation_type == "windshield_peek")
+        {
+            // --- Windshield Peek: front-load the lean, then finish with a smooth look-up ---
+            float p = g_ctx.animation_progress;
 
-            // Quadratic Bezier curve formula: B(t) = (1-t)^2*P0 + 2*(1-t)*t*P1 + t^2*P2
-            auto bezier = [&](float t, float p0_coord, float p1_coord, float p2_coord)
-            {
-                float one_minus_t = 1.0f - t;
-                return one_minus_t * one_minus_t * p0_coord + 2.0f * one_minus_t * t * p1_coord + t * t * p2_coord;
-            };
+            float pos_x_t = easeOutCubic(p);
+            float pos_y_t = smoothStep(remap01(p, 0.08f, 0.96f));
+            float pos_z_t = easeOutCubic(p);
+            float yaw_t = smoothStep(p);
+            float pitch_t = smoothStep(remap01(p, 0.42f, 1.0f));
+            float fov_t = smoothStep(p);
 
-            current_pos[0] = bezier(eased_p, start_pos_ptr[0], p1[0], end_pos_ptr[0]);
-            current_pos[1] = bezier(eased_p, start_pos_ptr[1], p1[1], end_pos_ptr[1]);
-            current_pos[2] = bezier(eased_p, start_pos_ptr[2], p1[2], end_pos_ptr[2]);
+            current_pos[0] = lerp(start_pos_ptr[0], end_pos_ptr[0], pos_x_t);
+            current_pos[1] = lerp(start_pos_ptr[1], end_pos_ptr[1], pos_y_t);
+            current_pos[2] = lerp(start_pos_ptr[2], end_pos_ptr[2], pos_z_t);
 
-            // --- ROTATION ---
-            // Yaw (left/right rotation) follows the main eased progress.
-            current_rot[0] = start_rot_ptr[0] + (end_rot_ptr[0] - start_rot_ptr[0]) * eased_p;
+            current_rot[0] = lerp(start_rot_ptr[0], end_rot_ptr[0], yaw_t);
+            current_rot[1] = lerp(start_rot_ptr[1], end_rot_ptr[1], pitch_t);
 
-            // Pitch (up/down rotation) for looking up at the end of the movement.
-            auto easeInQuad = [](float t)
-            { return t * t; };
-            float lookup_progress = std::fmax(0.0f, (p - 0.7f) / 0.3f);
-            float eased_lookup_progress = easeInQuad(lookup_progress);
-            current_rot[1] = start_rot_ptr[1] + (end_rot_ptr[1] - start_rot_ptr[1]) * eased_lookup_progress;
+            current_fov = lerp(start_fov, end_fov, fov_t);
+        }
+        else if (g_ctx.animation_type == "head_raise")
+        {
+            // --- Head Raise: keep the body late and let pitch drive the motion ---
+            float p = g_ctx.animation_progress;
 
-            // --- FOV ---
-            // Field of View animation remains linear for simplicity.
-            current_fov = start_fov + (end_fov - start_fov) * p;
+            float pos_t = smoothStep(remap01(p, 0.16f, 1.0f));
+            float yaw_t = smoothStep(remap01(p, 0.12f, 1.0f));
+            float pitch_t = easeOutCubic(p);
+            float fov_t = smoothStep(p);
+
+            current_pos[0] = lerp(start_pos_ptr[0], end_pos_ptr[0], pos_t);
+            current_pos[1] = lerp(start_pos_ptr[1], end_pos_ptr[1], pos_t);
+            current_pos[2] = lerp(start_pos_ptr[2], end_pos_ptr[2], pos_t);
+
+            current_rot[0] = lerp(start_rot_ptr[0], end_rot_ptr[0], yaw_t);
+            current_rot[1] = lerp(start_rot_ptr[1], end_rot_ptr[1], pitch_t);
+
+            current_fov = lerp(start_fov, end_fov, fov_t);
         }
         else
         {

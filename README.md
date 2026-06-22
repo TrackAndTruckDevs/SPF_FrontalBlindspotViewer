@@ -23,7 +23,7 @@ A plugin for American Truck Simulator and Euro Truck Simulator 2 that provides a
 ## Features
 
 *   Smooth, configurable camera animation to peek over the dashboard.
-*   Two distinct animation styles: a realistic "Live" mode that mimics human movement, and a fast "Linear" mode.
+*   Multiple animation styles: a realistic "Driver Lean" mode, a "Windshield Peek" mode for looking up at high traffic lights, a "Head Raise" mode for small upward glances, and a fast "Linear" mode.
 *   Interactive, real-time configuration: adjust the camera's final position while the view is active to perfectly match any truck.
 *   Fully customizable keybinds through the SPF Framework menu, including "Toggle" and "Hold" modes.
 *   Adjustable animation speed to fine-tune the feel of the movement.
@@ -74,4 +74,4 @@ The final folder structure should look like this:
 2.  Press the `DELETE` key to open the main SPF Framework window.
 3.  In the plugin list, find **SPF_FrontalBlindspotViewer** and enable it.
 4.  The feature is activated by pressing the `F10` key by default. You can change this in the "Key Binds" tab.
-5.  To adjust the camera, go to the "Plugin Settings" tab, select **SPF_FrontalBlindspotViewer**, and use the sliders. You can configure the final camera position, rotation, FOV, animation speed, and animation type ("Linear" or "Live"). The changes are applied instantly in a live preview when the peek view is active.
+5.  To adjust the camera, go to the "Plugin Settings" tab, select **SPF_FrontalBlindspotViewer**, and use the sliders. You can configure the final camera position, rotation, FOV, animation speed, and animation type ("Linear", "Driver Lean", "Windshield Peek", or "Head Raise"). The changes are applied instantly in a live preview when the peek view is active.

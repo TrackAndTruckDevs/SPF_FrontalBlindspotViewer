@@ -1,6 +1,18 @@
 {
     "language": {
-        "en": "English"
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
     },
     "plugin.description": "A plugin that enhances the frontal blindspot view with animated camera movements in Euro Truck Simulator 2 and American Truck Simulator.",
     "settings": {
@@ -19,10 +31,12 @@
         "animation.speed.title": "Animation Speed",
         "animation.speed.desc": "How fast the camera moves to the target position.",
         "animation.type.title": "Animation Type",
-        "animation.type.desc": "The style of camera animation. 'Linear' is a direct path. 'Live' simulates head movement.",
+        "animation.type.desc": "The style of camera animation. 'Linear' is a direct path. 'Driver Lean' mimics a natural forward lean. 'Windshield Peek' leans toward the windshield to see high lights. 'Head Raise' focuses on a small upward glance.",
         "animation_type_options": {
             "Linear": "Linear",
-            "Live": "Live"
+            "DriverLean": "Driver Lean",
+            "WindshieldPeek": "Windshield Peek",
+            "HeadRaise": "Head Raise"
         },
         "groups.target_camera.title": "Target Camera Settings",
         "groups.target_camera.desc": "Parameters for the camera's final position and orientation when peeking.",

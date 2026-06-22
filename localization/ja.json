@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "Euro Truck Simulator 2 および American Truck Simulator において、アニメーション化されたカメラワークにより前方死角の視界を向上させるプラグイン。",
+    "settings": {
+        "target_camera.position.x.title": "目標位置 X",
+        "target_camera.position.x.desc": "シート位置に対する左右のオフセット位置。",
+        "target_camera.position.y.title": "目標位置 Y",
+        "target_camera.position.y.desc": "シート位置に対する上下のオフセット位置。",
+        "target_camera.position.z.title": "目標位置 Z",
+        "target_camera.position.z.desc": "シート位置に対する前後のオフセット位置。",
+        "target_camera.rotation.yaw.title": "目標回転 ヨー (Yaw)",
+        "target_camera.rotation.yaw.desc": "水平方向の回転（左右を見渡す）。",
+        "target_camera.rotation.pitch.title": "目標回転 ピッチ (Pitch)",
+        "target_camera.rotation.pitch.desc": "垂直方向の回転（上下を見上げる/見下ろす）。",
+        "target_camera.fov.title": "目標視野角 (FOV)",
+        "target_camera.fov.desc": "前方を見る（覗き込む）際のマウスカメラの視野角。",
+        "animation.speed.title": "アニメーション速度",
+        "animation.speed.desc": "カメラが目標位置に移動する速さ。",
+        "animation.type.title": "アニメーションタイプ",
+        "animation.type.desc": "カメラアニメーションのスタイル。'Linear' は直線的な軌道。'Driver Lean' は運転手が自然に前かがみになる動きを再現。'Windshield Peek' は高い位置にある信号機などを見るためにフロントガラスへ近づく動き。'Head Raise' は視線を少し上へ向ける動きに特化。",
+        "animation_type_options": {
+            "Linear": "リニア (Linear)",
+            "DriverLean": "ドライバー・リーン (Driver Lean)",
+            "WindshieldPeek": "ウインドシールド・ピーク (Windshield Peek)",
+            "HeadRaise": "ヘッド・レイズ (Head Raise)"
+        },
+        "groups.target_camera.title": "目標カメラ設定",
+        "groups.target_camera.desc": "前方を見る（覗き込む）際の、カメラの最終的な位置と向きのパラメータ。",
+        "groups.animation.title": "アニメーション設定",
+        "groups.animation.desc": "カメラの遷移アニメーションを制御します。",
+        "groups.target_camera.position.title": "位置偏移",
+        "groups.target_camera.position.desc": "シート位置に対する位置オフセット。",
+        "groups.target_camera.rotation.title": "回転偏移",
+        "groups.target_camera.rotation.desc": "シート位置に対する回転オフセット。"
+    },
+    "keybinds": {
+        "toggle.title": "覗き込み視線の切り替え",
+        "toggle.desc": "押すと前方を覗き込んで死角を確認します。もう一度押すと元の視点に戻ります。"
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "language": {
+        "uk": "Ukrainian",
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "it": "Italian",
+        "es": "Spanish",
+        "zh": "Chinese",
+        "ja": "Japanese",
+        "ru": "Russian",
+        "pl": "Polish",
+        "nl": "Dutch",
+        "pt": "Portuguese",
+        "tr": "Turkish"
+    },
+    "plugin.description": "Ein Plugin, das die Sicht auf den vorderen toten Winkel durch animierte Kamerabewegungen in Euro Truck Simulator 2 und American Truck Simulator verbessert.",
+    "settings": {
+        "target_camera.position.x.title": "Zielposition X",
+        "target_camera.position.x.desc": "Positionsversatz nach links/rechts relativ zum Sitz.",
+        "target_camera.position.y.title": "Zielposition Y",
+        "target_camera.position.y.desc": "Positionsversatz nach oben/unten relativ zum Sitz.",
+        "target_camera.position.z.title": "Zielposition Z",
+        "target_camera.position.z.desc": "Positionsversatz nach vorne/hinten relativ zum Sitz.",
+        "target_camera.rotation.yaw.title": "Zielrotation Yaw (Drehung)",
+        "target_camera.rotation.yaw.desc": "Horizontale Drehung (nach links/rechts schauen).",
+        "target_camera.rotation.pitch.title": "Zielrotation Pitch (Neigung)",
+        "target_camera.rotation.pitch.desc": "Vertikale Neigung (nach oben/unten schauen).",
+        "target_camera.fov.title": "Zielsichtfeld (FOV)",
+        "target_camera.fov.desc": "Das Sichtfeld (Field of View) della Kamera beim Vorbeugen.",
+        "animation.speed.title": "Animationsgeschwindigkeit",
+        "animation.speed.desc": "Wie schnell sich die Kamera zur Zielposition bewegt.",
+        "animation.type.title": "Animationstyp",
+        "animation.type.desc": "Der Stil der Kameraanimation. 'Linear' ist ein direkter Pfad. 'Driver Lean' simuliert ein natürliches Vorlehnen des Fahrers. 'Windshield Peek' lehnt sich zur Windschutzscheibe, um hohe Ampeln zu sehen. 'Head Raise' konzentriert sich auf einen kurzen Blick nach oben.",
+        "animation_type_options": {
+            "Linear": "Linear",
+            "DriverLean": "Fahrer-Vorlehnen (Driver Lean)",
+            "WindshieldPeek": "Windschutzscheiben-Blick (Windshield Peek)",
+            "HeadRaise": "Kopf anheben (Head Raise)"
+        },
+        "groups.target_camera.title": "Zielkamera-Einstellungen",
+        "groups.target_camera.desc": "Parameter für die endgültige Position und Ausrichtung der Kamera beim Vorbeugen.",
+        "groups.animation.title": "Animations-Einstellungen",
+        "groups.animation.desc": "Steuertську Animationsübergang der Kamera.",
+        "groups.target_camera.position.title": "Position",
+        "groups.target_camera.position.desc": "Positionsversatz relativ zum Sitz.",
+        "groups.target_camera.rotation.title": "Rotation",
+        "groups.target_camera.rotation.desc": "Rotationsversatz relativ zum Sitz."
+    },
+    "keybinds": {
+        "toggle.title": "Blick zum Vorbeugen umschalten",
+        "toggle.desc": "Drücken, um sich nach vorne zu lehnen і den toten Winkel zu sehen. Erneut drücken, um zurückzukehren."
+    }
+}
