@@ -16,6 +16,33 @@
 
 A plugin for American Truck Simulator and Euro Truck Simulator 2 that provides a smooth, animated camera movement to let you easily see traffic lights when they are obstructed by your truck's A-pillar.
 
+> [!IMPORTANT]
+> **Hello everyone!** 
+> 
+> The functionality of this plugin has been merged into **MotionCab**. All future improvements and support for new game versions will now be implemented by the respected **aefly** in the [MotionCab](https://github.com/aefly/motioncab) plugin.
+> 
+> In MotionCab, you will find a lot of useful features:
+> * **Head Motion** — inertial head sway/tilt under acceleration, braking, and cornering
+> * **Steering Camera** — smoothed camera yaw following the steering wheel
+> * **Idle Breathing** — subtle breathing motion that fades out with speed
+> * **Suspension** — seat bounce and head tilt over bumps, plus grade follow
+> * **Engine Vibration** — RPM-scaled engine buzz
+> * **Mirror Check** — looks toward the mirror on turn signal
+> * **Manual Look** — smooth look-left/look-right and mirror glances
+> * **Road Irregularity** — ground chatter, plus rocking off-road
+> * **Speed Shake** — body sway growing with speed and rough ground
+> * **Body Dynamics** — head leans outward in corners and nods forward when braking
+> * **Engine Start/Stop** — mechanical shudder when the engine catches or dies
+> * **Natural Head Movement** — TrackIR-like head movement, without a tracker
+> * **Manual Zoom** — smooth zoom effect
+> * **Blindspot Viewer** — leans forward to see traffic lights hidden by the cab
+> * **Cabin Walk** — walks around the parked cabin and sits in the passenger seat or on the bunk
+> * **Profiles** — create, save, and switch between named presets
+> 
+> Go to the [Releases page](https://github.com/aefly/motioncab/releases) -> download the latest version -> install it like any standard SPF plugin -> enjoy realistic driving!
+> 
+> *This repository remains available solely as an example of writing plugins using the SPF-Framework.*
+
 ### See It In Action
 
 [Watch a demonstration of the plugin on YouTube](https://youtu.be/6zO-zVAVivo)
